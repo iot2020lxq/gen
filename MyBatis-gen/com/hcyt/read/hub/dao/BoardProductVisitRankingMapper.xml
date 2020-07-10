@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyt.read.hub.dao.BoardProductVisitRankingMapper" >
+    <resultMap id="BaseResultMap" type="com.hcyt.read.hub.entity.BoardProductVisitRanking" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="product_name" property="productName" jdbcType="VARCHAR" />
+        <result column="total_visit_product" property="totalVisitProduct" jdbcType="INTEGER" />
+        <result column="product_type" property="productType" jdbcType="INTEGER" />
+        <result column="product_id" property="productId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Where_Condition" >
+        <where >
+            <if test="id != null and id!=''" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="productName != null and productName!=''" >
+                and product_name=#{productName,jdbcType=VARCHAR}
+            </if>
+            <if test="totalVisitProduct != null and totalVisitProduct!=''" >
+                and total_visit_product=#{totalVisitProduct,jdbcType=INTEGER}
+            </if>
+            <if test="productType != null and productType!=''" >
+                and product_type=#{productType,jdbcType=INTEGER}
+            </if>
+            <if test="productId != null and productId!=''" >
+                and product_id=#{productId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Sort_Condition" >
+        <if test="sort!=null">
+        order by
+        <foreach collection="sort"  index="index"  item="item"  separator=",">
+            ${item.field} ${item.dir}
+        </foreach>
+        </if>
+
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, product_name, total_visit_product, product_type, product_id
+    </sql>
+
+    <insert id="insert" parameterType="com.hcyt.read.hub.entity.BoardProductVisitRanking" >
+        insert into board_product_visit_ranking
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                id,
+            </if>
+            <if test="productName != null and productName!=''" >
+                product_name,
+            </if>
+            <if test="totalVisitProduct != null and totalVisitProduct!=''" >
+                total_visit_product,
+            </if>
+            <if test="productType != null and productType!=''" >
+                product_type,
+            </if>
+            <if test="productId != null and productId!=''" >
+                product_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="productName != null and productName!=''" >
+                #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalVisitProduct != null and totalVisitProduct!=''" >
+                #{totalVisitProduct,jdbcType=INTEGER},
+            </if>
+            <if test="productType != null and productType!=''" >
+                #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="productId != null and productId!=''" >
+                #{productId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hcyt.read.hub.entity.BoardProductVisitRanking" >
+        update board_product_visit_ranking
+        <set >
+            <if test="productName != null" >
+                product_name = #{productName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalVisitProduct != null" >
+                total_visit_product = #{totalVisitProduct,jdbcType=INTEGER},
+            </if>
+            <if test="productType != null" >
+                product_type = #{productType,jdbcType=INTEGER},
+            </if>
+            <if test="productId != null" >
+                product_id = #{productId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from board_product_visit_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="countParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+        select count(*) from board_product_visit_ranking
+       <include refid="Where_Condition" />
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_product_visit_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectParam" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_product_visit_ranking
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+    <select id="selectParam_page" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_product_visit_ranking
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+</mapper>

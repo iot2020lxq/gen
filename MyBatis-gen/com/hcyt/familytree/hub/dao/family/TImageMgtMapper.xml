@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyt.familytree.hub.dao.family.TImageMgtMapper" >
+    <resultMap id="BaseResultMap" type="com.hcyt.familytree.hub.entity.family.TImageMgt" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="image_memo" property="imageMemo" jdbcType="VARCHAR" />
+        <result column="img_url" property="imgUrl" jdbcType="VARCHAR" />
+        <result column="image_type" property="imageType" jdbcType="INTEGER" />
+        <result column="link_type" property="linkType" jdbcType="INTEGER" />
+        <result column="pages_param" property="pagesParam" jdbcType="VARCHAR" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="publish_date" property="publishDate" jdbcType="TIMESTAMP" />
+        <result column="app_id" property="appId" jdbcType="VARCHAR" />
+        <result column="sort" property="sort" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Where_Condition" >
+        <where >
+            <if test="id != null and id!=''" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="title != null and title!=''" >
+                and title=#{title,jdbcType=VARCHAR}
+            </if>
+            <if test="imageMemo != null and imageMemo!=''" >
+                and image_memo=#{imageMemo,jdbcType=VARCHAR}
+            </if>
+            <if test="imgUrl != null and imgUrl!=''" >
+                and img_url=#{imgUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="imageType != null and imageType!=''" >
+                and image_type=#{imageType,jdbcType=INTEGER}
+            </if>
+            <if test="linkType != null and linkType!=''" >
+                and link_type=#{linkType,jdbcType=INTEGER}
+            </if>
+            <if test="pagesParam != null and pagesParam!=''" >
+                and pages_param=#{pagesParam,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null and status!=''" >
+                and status=#{status,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                and create_date=#{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="publishDate != null and publishDate!=''" >
+                and publish_date=#{publishDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="appId != null and appId!=''" >
+                and app_id=#{appId,jdbcType=VARCHAR}
+            </if>
+            <if test="sort != null and sort!=''" >
+                and sort=#{sort,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Sort_Condition" >
+        <if test="sort!=null">
+        order by
+        <foreach collection="sort"  index="index"  item="item"  separator=",">
+            ${item.field} ${item.dir}
+        </foreach>
+        </if>
+
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, title, image_memo, img_url, image_type, link_type, pages_param, status, create_date, 
+        publish_date, app_id, sort
+    </sql>
+
+    <insert id="insert" parameterType="com.hcyt.familytree.hub.entity.family.TImageMgt" >
+        insert into t_image_mgt
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                id,
+            </if>
+            <if test="title != null and title!=''" >
+                title,
+            </if>
+            <if test="imageMemo != null and imageMemo!=''" >
+                image_memo,
+            </if>
+            <if test="imgUrl != null and imgUrl!=''" >
+                img_url,
+            </if>
+            <if test="imageType != null and imageType!=''" >
+                image_type,
+            </if>
+            <if test="linkType != null and linkType!=''" >
+                link_type,
+            </if>
+            <if test="pagesParam != null and pagesParam!=''" >
+                pages_param,
+            </if>
+            <if test="status != null and status!=''" >
+                status,
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                create_date,
+            </if>
+            <if test="publishDate != null and publishDate!=''" >
+                publish_date,
+            </if>
+            <if test="appId != null and appId!=''" >
+                app_id,
+            </if>
+            <if test="sort != null and sort!=''" >
+                sort,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null and title!=''" >
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="imageMemo != null and imageMemo!=''" >
+                #{imageMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null and imgUrl!=''" >
+                #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="imageType != null and imageType!=''" >
+                #{imageType,jdbcType=INTEGER},
+            </if>
+            <if test="linkType != null and linkType!=''" >
+                #{linkType,jdbcType=INTEGER},
+            </if>
+            <if test="pagesParam != null and pagesParam!=''" >
+                #{pagesParam,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status!=''" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishDate != null and publishDate!=''" >
+                #{publishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appId != null and appId!=''" >
+                #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null and sort!=''" >
+                #{sort,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hcyt.familytree.hub.entity.family.TImageMgt" >
+        update t_image_mgt
+        <set >
+            <if test="title != null" >
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="imageMemo != null" >
+                image_memo = #{imageMemo,jdbcType=VARCHAR},
+            </if>
+            <if test="imgUrl != null" >
+                img_url = #{imgUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="imageType != null" >
+                image_type = #{imageType,jdbcType=INTEGER},
+            </if>
+            <if test="linkType != null" >
+                link_type = #{linkType,jdbcType=INTEGER},
+            </if>
+            <if test="pagesParam != null" >
+                pages_param = #{pagesParam,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null" >
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="publishDate != null" >
+                publish_date = #{publishDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="appId != null" >
+                app_id = #{appId,jdbcType=VARCHAR},
+            </if>
+            <if test="sort != null" >
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from t_image_mgt
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="countParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+        select count(*) from t_image_mgt
+       <include refid="Where_Condition" />
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_image_mgt
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectParam" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_image_mgt
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+    <select id="selectParam_page" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from t_image_mgt
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+</mapper>

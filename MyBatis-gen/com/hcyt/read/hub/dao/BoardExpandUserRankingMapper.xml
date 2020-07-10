@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyt.read.hub.dao.BoardExpandUserRankingMapper" >
+    <resultMap id="BaseResultMap" type="com.hcyt.read.hub.entity.BoardExpandUserRanking" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="head_picture" property="headPicture" jdbcType="VARCHAR" />
+        <result column="shop_name" property="shopName" jdbcType="VARCHAR" />
+        <result column="total_expand_num" property="totalExpandNum" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="shop_id" property="shopId" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Where_Condition" >
+        <where >
+            <if test="id != null and id!=''" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="userName != null and userName!=''" >
+                and user_name=#{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="headPicture != null and headPicture!=''" >
+                and head_picture=#{headPicture,jdbcType=VARCHAR}
+            </if>
+            <if test="shopName != null and shopName!=''" >
+                and shop_name=#{shopName,jdbcType=VARCHAR}
+            </if>
+            <if test="totalExpandNum != null and totalExpandNum!=''" >
+                and total_expand_num=#{totalExpandNum,jdbcType=INTEGER}
+            </if>
+            <if test="userId != null and userId!=''" >
+                and user_id=#{userId,jdbcType=INTEGER}
+            </if>
+            <if test="shopId != null and shopId!=''" >
+                and shop_id=#{shopId,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Sort_Condition" >
+        <if test="sort!=null">
+        order by
+        <foreach collection="sort"  index="index"  item="item"  separator=",">
+            ${item.field} ${item.dir}
+        </foreach>
+        </if>
+
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, user_name, head_picture, shop_name, total_expand_num, user_id, shop_id
+    </sql>
+
+    <insert id="insert" parameterType="com.hcyt.read.hub.entity.BoardExpandUserRanking" >
+        insert into board_expand_user_ranking
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                id,
+            </if>
+            <if test="userName != null and userName!=''" >
+                user_name,
+            </if>
+            <if test="headPicture != null and headPicture!=''" >
+                head_picture,
+            </if>
+            <if test="shopName != null and shopName!=''" >
+                shop_name,
+            </if>
+            <if test="totalExpandNum != null and totalExpandNum!=''" >
+                total_expand_num,
+            </if>
+            <if test="userId != null and userId!=''" >
+                user_id,
+            </if>
+            <if test="shopId != null and shopId!=''" >
+                shop_id,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userName != null and userName!=''" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headPicture != null and headPicture!=''" >
+                #{headPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null and shopName!=''" >
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalExpandNum != null and totalExpandNum!=''" >
+                #{totalExpandNum,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null and userId!=''" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null and shopId!=''" >
+                #{shopId,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hcyt.read.hub.entity.BoardExpandUserRanking" >
+        update board_expand_user_ranking
+        <set >
+            <if test="userName != null" >
+                user_name = #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="headPicture != null" >
+                head_picture = #{headPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="shopName != null" >
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="totalExpandNum != null" >
+                total_expand_num = #{totalExpandNum,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null" >
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="shopId != null" >
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from board_expand_user_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="countParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+        select count(*) from board_expand_user_ranking
+       <include refid="Where_Condition" />
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_expand_user_ranking
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectParam" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_expand_user_ranking
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+    <select id="selectParam_page" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from board_expand_user_ranking
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+</mapper>

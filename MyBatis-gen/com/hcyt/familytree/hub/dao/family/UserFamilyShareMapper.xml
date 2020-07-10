@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyt.familytree.hub.dao.family.UserFamilyShareMapper" >
+    <resultMap id="BaseResultMap" type="com.hcyt.familytree.hub.entity.family.UserFamilyShare" >
+        <result column="id" property="id" jdbcType="INTEGER" />
+        <result column="user_id" property="userId" jdbcType="INTEGER" />
+        <result column="family_name" property="familyName" jdbcType="VARCHAR" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+        <result column="main_photo" property="mainPhoto" jdbcType="VARCHAR" />
+        <result column="share_way" property="shareWay" jdbcType="INTEGER" />
+        <result column="jz_way" property="jzWay" jdbcType="INTEGER" />
+        <result column="status" property="status" jdbcType="INTEGER" />
+        <result column="reason" property="reason" jdbcType="VARCHAR" />
+        <result column="cert_url" property="certUrl" jdbcType="VARCHAR" />
+        <result column="file_url" property="fileUrl" jdbcType="VARCHAR" />
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
+        <result column="user_name" property="userName" jdbcType="VARCHAR" />
+        <result column="user_mobile" property="userMobile" jdbcType="VARCHAR" />
+        <result column="read_flag" property="readFlag" jdbcType="INTEGER" />
+    </resultMap>
+
+    <sql id="Where_Condition" >
+        <where >
+            <if test="id != null and id!=''" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="userId != null and userId!=''" >
+                and user_id=#{userId,jdbcType=INTEGER}
+            </if>
+            <if test="familyName != null and familyName!=''" >
+                and family_name=#{familyName,jdbcType=VARCHAR}
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                and create_date=#{createDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                and main_photo=#{mainPhoto,jdbcType=VARCHAR}
+            </if>
+            <if test="shareWay != null and shareWay!=''" >
+                and share_way=#{shareWay,jdbcType=INTEGER}
+            </if>
+            <if test="jzWay != null and jzWay!=''" >
+                and jz_way=#{jzWay,jdbcType=INTEGER}
+            </if>
+            <if test="status != null and status!=''" >
+                and status=#{status,jdbcType=INTEGER}
+            </if>
+            <if test="reason != null and reason!=''" >
+                and reason=#{reason,jdbcType=VARCHAR}
+            </if>
+            <if test="certUrl != null and certUrl!=''" >
+                and cert_url=#{certUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="fileUrl != null and fileUrl!=''" >
+                and file_url=#{fileUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="updateDate != null and updateDate!=''" >
+                and update_date=#{updateDate,jdbcType=TIMESTAMP}
+            </if>
+            <if test="userName != null and userName!=''" >
+                and user_name=#{userName,jdbcType=VARCHAR}
+            </if>
+            <if test="userMobile != null and userMobile!=''" >
+                and user_mobile=#{userMobile,jdbcType=VARCHAR}
+            </if>
+            <if test="readFlag != null and readFlag!=''" >
+                and read_flag=#{readFlag,jdbcType=INTEGER}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Sort_Condition" >
+        <if test="sort!=null">
+        order by
+        <foreach collection="sort"  index="index"  item="item"  separator=",">
+            ${item.field} ${item.dir}
+        </foreach>
+        </if>
+
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, user_id, family_name, create_date, main_photo, share_way, jz_way, status, reason, 
+        cert_url, file_url, update_date, user_name, user_mobile, read_flag
+    </sql>
+
+    <insert id="insert" parameterType="com.hcyt.familytree.hub.entity.family.UserFamilyShare" >
+        insert into user_family_share
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                id,
+            </if>
+            <if test="userId != null and userId!=''" >
+                user_id,
+            </if>
+            <if test="familyName != null and familyName!=''" >
+                family_name,
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                create_date,
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                main_photo,
+            </if>
+            <if test="shareWay != null and shareWay!=''" >
+                share_way,
+            </if>
+            <if test="jzWay != null and jzWay!=''" >
+                jz_way,
+            </if>
+            <if test="status != null and status!=''" >
+                status,
+            </if>
+            <if test="reason != null and reason!=''" >
+                reason,
+            </if>
+            <if test="certUrl != null and certUrl!=''" >
+                cert_url,
+            </if>
+            <if test="fileUrl != null and fileUrl!=''" >
+                file_url,
+            </if>
+            <if test="updateDate != null and updateDate!=''" >
+                update_date,
+            </if>
+            <if test="userName != null and userName!=''" >
+                user_name,
+            </if>
+            <if test="userMobile != null and userMobile!=''" >
+                user_mobile,
+            </if>
+            <if test="readFlag != null and readFlag!=''" >
+                read_flag,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null and userId!=''" >
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="familyName != null and familyName!=''" >
+                #{familyName,jdbcType=VARCHAR},
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                #{mainPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="shareWay != null and shareWay!=''" >
+                #{shareWay,jdbcType=INTEGER},
+            </if>
+            <if test="jzWay != null and jzWay!=''" >
+                #{jzWay,jdbcType=INTEGER},
+            </if>
+            <if test="status != null and status!=''" >
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="reason != null and reason!=''" >
+                #{reason,jdbcType=VARCHAR},
+            </if>
+            <if test="certUrl != null and certUrl!=''" >
+                #{certUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="fileUrl != null and fileUrl!=''" >
+                #{fileUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="updateDate != null and updateDate!=''" >
+                #{updateDate,jdbcType=TIMESTAMP},
+            </if>
+            <if test="userName != null and userName!=''" >
+                #{userName,jdbcType=VARCHAR},
+            </if>
+            <if test="userMobile != null and userMobile!=''" >
+                #{userMobile,jdbcType=VARCHAR},
+            </if>
+            <if test="readFlag != null and readFlag!=''" >
+                #{readFlag,jdbcType=INTEGER},
+            </if>
+        </trim>
+    </insert>
+
+    <select id="countParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+        select count(*) from user_family_share
+       <include refid="Where_Condition" />
+    </select>
+
+</mapper>

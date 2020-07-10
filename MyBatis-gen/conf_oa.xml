@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">  
+<generatorConfiguration>  
+   <classPathEntry location="D:\gen\MyBatis-gen\mysql-connector-java-5.1.30.jar" />  
+   <context id="DB2Tables" targetRuntime="MyBatis3">        
+       <commentGenerator>  
+          <property name="suppressAllComments" value="true" />  
+       </commentGenerator>  
+	   <!--
+      <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://127.0.0.1:3227/hcytoa" userId="root" password="Hcyt678$">  
+	  -->
+	        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://192.168.16.251:3306/rryue_st" userId="root" password="book">  
+
+        
+       </jdbcConnection>          
+        <javaTypeResolver >  
+           <property name="forceBigDecimals" value="false" />  
+        </javaTypeResolver>           
+        <javaModelGenerator targetPackage="com.hcyt.read.hub.entity" targetProject="d:\gen\MyBatis-gen">
+            <property name="enableSubPackages" value="true" />  
+            <property name="trimStrings" value="true" />  
+       </javaModelGenerator>  
+       <sqlMapGenerator targetPackage="com.hcyt.read.hub.dao"  targetProject="d:\gen\MyBatis-gen">  
+            <property name="enableSubPackages" value="true" />  
+        </sqlMapGenerator>  
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hcyt.read.hub.dao"  targetProject="d:\gen\MyBatis-gen">  
+            <property name="enableSubPackages" value="true" />  
+        </javaClientGenerator>
+        <table tableName="board_index_data" domainObjectName="BoardIndexData"/>  
+    </context>       
+</generatorConfiguration>

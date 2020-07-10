@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hcyt.familytree.hub.dao.family.FamilyCitangContentMapper" >
+    <resultMap id="BaseResultMap" type="com.hcyt.familytree.hub.entity.family.FamilyCitangContent" >
+        <id column="id" property="id" jdbcType="INTEGER" />
+        <result column="citang_id" property="citangId" jdbcType="INTEGER" />
+        <result column="main_photo" property="mainPhoto" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="page" property="page" jdbcType="INTEGER" />
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <sql id="Where_Condition" >
+        <where >
+            <if test="id != null and id!=''" >
+                and id=#{id,jdbcType=INTEGER}
+            </if>
+            <if test="citangId != null and citangId!=''" >
+                and citang_id=#{citangId,jdbcType=INTEGER}
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                and main_photo=#{mainPhoto,jdbcType=VARCHAR}
+            </if>
+            <if test="content != null and content!=''" >
+                and content=#{content,jdbcType=VARCHAR}
+            </if>
+            <if test="page != null and page!=''" >
+                and page=#{page,jdbcType=INTEGER}
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                and create_date=#{createDate,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </sql>
+
+    <sql id="Sort_Condition" >
+        <if test="sort!=null">
+        order by
+        <foreach collection="sort"  index="index"  item="item"  separator=",">
+            ${item.field} ${item.dir}
+        </foreach>
+        </if>
+
+    </sql>
+
+    <sql id="Base_Column_List" >
+        id, citang_id, main_photo, content, page, create_date
+    </sql>
+
+    <insert id="insert" parameterType="com.hcyt.familytree.hub.entity.family.FamilyCitangContent" >
+        insert into family_citang_content
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                id,
+            </if>
+            <if test="citangId != null and citangId!=''" >
+                citang_id,
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                main_photo,
+            </if>
+            <if test="content != null and content!=''" >
+                content,
+            </if>
+            <if test="page != null and page!=''" >
+                page,
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                create_date,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="id != null and id!=''" >
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="citangId != null and citangId!=''" >
+                #{citangId,jdbcType=INTEGER},
+            </if>
+            <if test="mainPhoto != null and mainPhoto!=''" >
+                #{mainPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null and content!=''" >
+                #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="page != null and page!=''" >
+                #{page,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null and createDate!=''" >
+                #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <update id="update" parameterType="com.hcyt.familytree.hub.entity.family.FamilyCitangContent" >
+        update family_citang_content
+        <set >
+            <if test="citangId != null" >
+                citang_id = #{citangId,jdbcType=INTEGER},
+            </if>
+            <if test="mainPhoto != null" >
+                main_photo = #{mainPhoto,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null" >
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="page != null" >
+                page = #{page,jdbcType=INTEGER},
+            </if>
+            <if test="createDate != null" >
+                create_date = #{createDate,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer" >
+        delete from family_citang_content
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <select id="countParam" parameterType="java.util.Map" resultType="java.lang.Integer" >
+        select count(*) from family_citang_content
+       <include refid="Where_Condition" />
+    </select>
+
+    <select id="selectById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from family_citang_content
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectParam" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from family_citang_content
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+    <select id="selectParam_page" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+        select 
+        <include refid="Base_Column_List" />
+        from family_citang_content
+        <include refid="Where_Condition" />
+        <include refid="Sort_Condition" />
+    </select>
+
+</mapper>
